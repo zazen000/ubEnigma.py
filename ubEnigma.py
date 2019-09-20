@@ -18,9 +18,8 @@ def main(myMode, myKey, myMessage):
     pyperclip.copy(translated)
     '''
     ## Remove triple quotes from this section to copy encoded api to a file
-    file = open('filename', 'w') # change filename for each api_id
-    file.write(translated)
-    file.close()
+    with open('filename', 'w') as out:   # change filename for each api_id
+        out.write(translated)
     '''
     return translated
 
@@ -98,15 +97,15 @@ def read_binary_file(fmt='', filename=''):
 
 
 def write_key(fmt='', filename='', key):
-	write_binary_file(fmt, filename, *args)
+    write_binary_file(fmt, filename, *args)
 
 
 ## Clandestine pass of key used to decrypt encoded API_ID to user file
 
 def read_key(fmt='', filename=''):
-	key = read_binary_file(fmt, filename)
-	mykey = int((key)[0])
-	return mykey
+    key = read_binary_file(fmt, filename)
+    mykey = int((key)[0])
+    return mykey
 
 '''
 
