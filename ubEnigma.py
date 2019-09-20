@@ -17,7 +17,7 @@ def main(myMode, myKey, myMessage):
     
     pyperclip.copy(translated)
     '''
-    # Remove triple quotes from this section to copy encoded api to a file
+    ## Remove triple quotes from this section to copy encoded api to a file
     file = open('filename', 'w') # change filename for each api_id
     file.write(translated)
     file.close()
@@ -69,6 +69,7 @@ def decryptMessage(key, message):
     return plaintext
 
 
+##  Function to generate a key so you don't have to
 def getRandomKey():
     while True:
         keyA = random.randint(2, len(SYMBOLS))
