@@ -12,11 +12,12 @@ def main(myMode, myKey, myMessage):
         translated = encryptMessage(myKey, myMessage)
     elif myMode == 'decrypt':
         translated = decryptMessage(myKey, myMessage)
-#    print(f'Key: {myKey}')
+	
     print(f'{myMode.title()}ed text: {translated}')
     pyperclip.copy(translated)
     print(f'Full {myMode}ed text copied to clipboard.')
     '''
+    # Remove triple quotes for this section to encrypt key to .bin file
     file = open('owm.txt', 'w') # change filename for each api_id
     file.write(translated)
     file.close()
