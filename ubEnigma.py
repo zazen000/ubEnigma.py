@@ -1,4 +1,4 @@
-cdimport cryptomath
+import cryptomath
 import sys, pyperclip, random
 from struct import Struct
 
