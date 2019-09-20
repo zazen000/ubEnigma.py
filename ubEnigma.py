@@ -1,8 +1,10 @@
+##  From the book "Hacking Ciphers" by Al Sweigart with a couple mods of my own
+
 import cryptomath
 import sys, pyperclip, random
 from struct import Struct
 
-## Works best if len(SYMBOLS) = odd number
+## Works best if len(SYMBOLS) == odd number. I don't know why
 SYMBOLS = """ !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
 
@@ -12,13 +14,11 @@ def main(myMode, myKey, myMessage):
         translated = encryptMessage(myKey, myMessage)
     elif myMode == 'decrypt':
         translated = decryptMessage(myKey, myMessage)
-	
-    print(f'{myMode.title()}ed text: {translated}')
+    
     pyperclip.copy(translated)
-    print(f'Full {myMode}ed text copied to clipboard.')
     '''
-    # Remove triple quotes for this section to encrypt key to .bin file
-    file = open('owm.txt', 'w') # change filename for each api_id
+    # Remove triple quotes from this section to copy encoded api to a file
+    file = open('filename', 'w') # change filename for each api_id
     file.write(translated)
     file.close()
     '''
@@ -38,10 +38,8 @@ def checkKeys(keyA, keyB, mode):
         sys.exit('The affine cipher becomes incredibly weak when key B is set to 0. Choose a different key.')
     if keyA < 0 or keyB < 0 or keyB > len(SYMBOLS) - 1:
         sys.exit('Key A must be greater than 0 and Key B must be between 0 and %s.' % (len(SYMBOLS) - 1))
-#    if cryptomath.gcd(keyA, len(SYMBOLS)) != 1:
-#        sys.exit('Key A (%s) and the symbol set size (%s) are not relatively prime. Choose a different key.' % (keyA, len(SYMBOLS)))
 
-
+	
 def encryptMessage(key, message):
     keyA, keyB = getKeyParts(key)
     checkKeys(keyA, keyB, 'encrypt')
@@ -78,7 +76,7 @@ def getRandomKey():
         if cryptomath.gcd(keyA, len(SYMBOLS)) == 1:
             return keyA * len(SYMBOLS) + keyB
 
-
+##  -----------------------------------------------------------------------------
 ##  Function that writes the value of *args, **kwargs to a binary file
 ##  fmt = '' is for the data types being packed, ie: "ffi" denotes three
 ##  parameters of a float, a float, and an integer. List of data types below.
@@ -98,8 +96,8 @@ def read_binary_file(fmt='', filename=''):
     return data
 
 
-def write_key(fmt='', filename='', *args):
-	write_binary_file(fmt, filename, *args)  # owm: 2111 
+def write_key(fmt='', filename='', key):
+	write_binary_file(fmt, filename, *args)
 
 
 ## Clandestine pass of key used to decrypt encoded API_ID to user file
@@ -109,10 +107,8 @@ def read_key(fmt='', filename=''):
 	mykey = int((key)[0])
 	return mykey
 
-
-
-
 '''
+
 x   pad byte            no value        c   char                bytes of length 1
 b   signed char         integer         B   unsigned char       integer
 ?   _Bool               bool            h   short               integer
@@ -123,6 +119,7 @@ Q   unsigned long long  integer         n   ssize_t             integer
 N   size_t              integer         f   float               float
 d   double              float           s   char[]              bytes
 p   char[]              bytes
+
 '''
 
 
