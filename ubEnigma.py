@@ -4,6 +4,7 @@ import cryptomath
 import sys, pyperclip, random
 from struct import Struct
 
+
 ## Works best if len(SYMBOLS) == odd number. I don't know why
 SYMBOLS = """ !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
@@ -16,11 +17,6 @@ def main(myMode, myKey, myMessage):
         translated = decryptMessage(myKey, myMessage)
     
     pyperclip.copy(translated)
-    '''
-    ## Remove triple quotes from this section to copy encoded api to a file
-    with open('filename', 'w') as out:   # change filename for each api_id
-        out.write(translated)
-    '''
     return translated
 
 
@@ -49,7 +45,7 @@ def encryptMessage(key, message):
             symIndex = SYMBOLS.find(symbol)
             ciphertext += SYMBOLS[(symIndex * keyA + keyB) % len(SYMBOLS)]
         else:
-            ciphertext += symbol # just append this symbol unencrypted
+            ciphertext += symbol 		# just append this symbol unencrypted
     return ciphertext
 
 
@@ -64,7 +60,7 @@ def decryptMessage(key, message):
             symIndex = SYMBOLS.find(symbol)
             plaintext += SYMBOLS[(symIndex - keyB) * modInverseOfKeyA % len(SYMBOLS)]
         else:
-            plaintext += symbol # just append this symbol undecrypted
+            plaintext += symbol 		# just append this symbol undecrypted
     return plaintext
 
 
@@ -86,7 +82,22 @@ def write_binary_file(fmt='', filename='',*args, **kwargs):
     data = mystruct.pack(*args, **kwargs)
     with open(filename, "wb") as out:
         out.write(data)
+	
+		'''
 
+		x   pad byte            no value        c   char                bytes of length 1
+		b   signed char         integer         B   unsigned char       integer
+		?   _Bool               bool            h   short               integer
+		H   unsigned short      integer         i   int                 integer
+		I   unsigned int        integer         l   long                integer
+		L   unsigned long       integer         q   long long           integer
+		Q   unsigned long long  integer         n   ssize_t             integer
+		N   size_t              integer         f   float               float
+		d   double              float           s   char[]              bytes
+		p   char[]              bytes
+
+		'''
+	
 ## Reads the binary file and upacks the data
 
 def read_binary_file(fmt='', filename=''):
@@ -106,27 +117,6 @@ def read_key(fmt='', filename=''):
     key = read_binary_file(fmt, filename)
     mykey = int((key)[0])
     return mykey
-
-'''
-
-x   pad byte            no value        c   char                bytes of length 1
-b   signed char         integer         B   unsigned char       integer
-?   _Bool               bool            h   short               integer
-H   unsigned short      integer         i   int                 integer
-I   unsigned int        integer         l   long                integer
-L   unsigned long       integer         q   long long           integer
-Q   unsigned long long  integer         n   ssize_t             integer
-N   size_t              integer         f   float               float
-d   double              float           s   char[]              bytes
-p   char[]              bytes
-
-'''
-
-
-
-
-
-
 
 
 
