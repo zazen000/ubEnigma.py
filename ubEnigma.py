@@ -1,6 +1,6 @@
 '''
 ubEnigma.py - a Crypto module for hiding secret API keys and more
-From the book "Hacking Ciphers" by Al Sweigart with a couple mods of my own
+From the book "Hacking Secret Ciphers with Python" by Al Sweigart with a couple mods of my own
 '''
 
 import cryptomath
