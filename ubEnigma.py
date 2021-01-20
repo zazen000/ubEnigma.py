@@ -1,4 +1,6 @@
-##  From the book "Hacking Ciphers" by Al Sweigart with a couple mods of my own
+'''
+ubEnigma.py - 
+From the book "Hacking Ciphers" by Al Sweigart with a couple mods of my own
 
 import cryptomath
 import sys, pyperclip, random
