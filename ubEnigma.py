@@ -1,11 +1,11 @@
 '''
-ubEnigma.py - 
+ubEnigma.py - a Crypto module for hiding secret API keys and more
 From the book "Hacking Ciphers" by Al Sweigart with a couple mods of my own
+'''
 
 import cryptomath
 import sys, pyperclip, random
 from struct import Struct
-
 
 ## Works best if len(SYMBOLS) == odd number. I don't know why
 SYMBOLS = """ !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]
@@ -101,7 +101,6 @@ def write_binary_file(fmt='', filename='',*args, **kwargs):
 		'''
 	
 ## Reads the binary file and upacks the data
-
 def read_binary_file(fmt='', filename=''):
     fp = open(filename, "rb").read()
     mystruck = Struct(fmt)
@@ -114,7 +113,6 @@ def write_key(fmt='', filename='', key):
 
 
 ## Clandestine pass of key used to decrypt encoded API_ID to user file
-
 def read_key(fmt='', filename=''):
     key = read_binary_file(fmt, filename)
     mykey = int((key)[0])
