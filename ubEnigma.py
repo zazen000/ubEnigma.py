@@ -113,8 +113,8 @@ def write_binary_file(fmt='', filename='',*args, **kwargs):
 ## Reads the binary file and upacks the data
 def read_binary_file(fmt='', filename=''):
     fp = open(filename, "rb").read()
-    mystruck = Struct(fmt)
-    data = mystruck.unpack(fp)
+    mystruct = Struct(fmt)
+    data = mystruct.unpack(fp)
     return data
 
 
