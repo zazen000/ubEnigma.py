@@ -4,7 +4,7 @@ From the book "Hacking Secret Ciphers with Python" by Al Sweigart with a couple 
 '''
 
 import cryptomath
-import sys, pyperclip, random
+import sys, random
 from struct import Struct
 
 ## Works best if len(SYMBOLS) == odd number. I don't know why
@@ -74,6 +74,17 @@ def getRandomKey():
         if cryptomath.gcd(keyA, len(SYMBOLS)) == 1:
             return keyA * len(SYMBOLS) + keyB
 
+
+def generate_key_and_code(bin_name, txt_name, text='api'):  ## 'api' to be encrypted
+    write_key('i', bin_name, getRandomKey())                ## encrypt - binary file
+
+    myKey = read_key('i', bin_name)
+    myMode = 'encrypt'
+    myMessage = text
+
+    coded = main(myMode, myKey, myMessage)
+    write_txt_file(txt_name, coded)
+
 ##  -----------------------------------------------------------------------------
 ##  Function that writes the value of *args, **kwargs to a binary file
 ##  fmt = '' is for the data types being packed, ie: "ffi" denotes three
@@ -108,6 +119,14 @@ def read_binary_file(fmt='', filename=''):
     return data
 
 
+def write_binary_file(fmt='', filename='',*args, **kwargs):
+    from struct import Struct
+    mystruct = Struct(fmt)
+    data = mystruct.pack(*args, **kwargs)
+    with open(filename, "wb") as out:
+        out.write(data)
+	
+
 def write_key(fmt='', filename='', key):
     write_binary_file(fmt, filename, *args)
 
@@ -117,6 +136,12 @@ def read_key(fmt='', filename=''):
     key = read_binary_file(fmt, filename)
     mykey = int((key)[0])
     return mykey
+
+
+def write_txt_file(filename='', txt='', option="a"):
+    with open(filename, option) as file:
+        file.write('\n')
+        file.write(txt)
 
 
 
