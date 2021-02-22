@@ -142,6 +142,12 @@ def write_txt_file(filename='', txt='', option="a"):
     with open(filename, option) as file:
         file.write('\n')
         file.write(txt)
+	
+	
+def read_txt_file(filename=''):
+    with open(filename, 'r') as file:
+        data = file.read()
+    return data
 
 
 
