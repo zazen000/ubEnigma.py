@@ -1,3 +1,4 @@
+# author: Al Sweigart
 # Cryptomath Module
 # http://inventwithpython.com/hacking (BSD Licensed)
 
