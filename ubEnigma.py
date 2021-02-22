@@ -17,8 +17,7 @@ def main(myMode, myKey, myMessage):
         translated = encryptMessage(myKey, myMessage)
     elif myMode == 'decrypt':
         translated = decryptMessage(myKey, myMessage)
-    
-    pyperclip.copy(translated)
+
     return translated
 
 
