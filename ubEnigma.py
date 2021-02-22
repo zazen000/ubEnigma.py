@@ -7,7 +7,7 @@ import cryptomath
 import sys, random
 from struct import Struct
 
-## Works best if len(SYMBOLS) == odd number. I don't know why
+
 SYMBOLS = """ !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
 
